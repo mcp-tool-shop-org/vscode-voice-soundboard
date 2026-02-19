@@ -2,7 +2,7 @@
   "name": "vscode-voice-soundboard",
   "displayName": "Voice Soundboard",
   "description": "TTS synthesis with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "mcp-tool-shop",
   "license": "MIT",
   "repository": {
@@ -103,12 +103,17 @@
         "voiceSoundboard.backend": {
           "type": "string",
           "enum": [
-            "mock",
             "python",
-            "http"
+            "http",
+            "mock"
           ],
-          "default": "mock",
-          "description": "TTS backend type"
+          "default": "python",
+          "description": "TTS backend: python (local Kokoro, free), http (OpenAI/ElevenLabs), mock (silent)",
+          "enumDescriptions": [
+            "Local Kokoro TTS via Python (free, requires pip install)",
+            "Cloud TTS via OpenAI, ElevenLabs, or Azure (requires API key)",
+            "Silent mock audio for testing"
+          ]
         },
         "voiceSoundboard.autoStart": {
           "type": "boolean",
@@ -124,6 +129,17 @@
           ],
           "default": "wav",
           "description": "Audio output format"
+        },
+        "voiceSoundboard.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key for cloud TTS (http backend). Leave empty to use local Python backend.",
+          "markdownDescription": "OpenAI API key for cloud TTS (`http` backend). Leave empty to use local Python/Kokoro backend."
+        },
+        "voiceSoundboard.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to Python executable (auto-detected if empty)"
         }
       }
     }

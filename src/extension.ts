@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { startServer, stopServer, isConnected } from "./mcp/lifecycle.js";
 import { getConfig } from "./config.js";
+import { ensureBackendReady } from "./setup.js";
 import {
   speakText,
   speakSelection,
@@ -36,11 +37,25 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     vscode.commands.registerCommand("voiceSoundboard.togglePanel", togglePanel),
   );
 
-  // Auto-start
+  // Auto-start with setup
   const config = getConfig();
   if (config.autoStart) {
     try {
-      await startServer(config);
+      // Check backend readiness (may prompt user for setup)
+      const setup = await ensureBackendReady(config);
+
+      if (!setup.ready) {
+        updateStatusBar("setup");
+        sidebarProvider.notifySetupRequired(
+          setup.message || "TTS backend setup required",
+          setup.backend,
+        );
+        return;
+      }
+
+      // Start with resolved backend (may differ from config if user switched)
+      const resolvedConfig = { ...config, backend: setup.backend };
+      await startServer(resolvedConfig);
       updateStatusBar("ready");
       await refreshVoiceCache();
       sidebarProvider.notifyConnected();
@@ -58,7 +73,7 @@ export async function deactivate(): Promise<void> {
   await stopServer();
 }
 
-function updateStatusBar(state: "connecting" | "ready" | "offline"): void {
+function updateStatusBar(state: "connecting" | "ready" | "offline" | "setup"): void {
   switch (state) {
     case "connecting":
       statusBarItem.text = "$(loading~spin) Soundboard";
@@ -71,6 +86,10 @@ function updateStatusBar(state: "connecting" | "ready" | "offline"): void {
     case "offline":
       statusBarItem.text = "$(mute) Soundboard";
       statusBarItem.tooltip = "Voice Soundboard: Offline";
+      break;
+    case "setup":
+      statusBarItem.text = "$(gear) Soundboard";
+      statusBarItem.tooltip = "Voice Soundboard: Setup required — click to configure";
       break;
   }
 }

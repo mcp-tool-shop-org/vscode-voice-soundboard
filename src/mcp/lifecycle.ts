@@ -19,16 +19,28 @@ export async function startServer(config: ExtensionConfig): Promise<Client> {
     args.push(`--format=${config.format}`);
   }
 
+  const env: Record<string, string> = {
+    ...process.env as Record<string, string>,
+    VOICE_SOUNDBOARD_ARTIFACT_MODE: "path",
+  };
+
+  // Pass API key for HTTP backend
+  if (config.backend === "http" && config.openaiApiKey) {
+    env.OPENAI_API_KEY = config.openaiApiKey;
+  }
+
+  // Pass custom Python path if set
+  if (config.pythonPath) {
+    env.VOICE_SOUNDBOARD_PYTHON = config.pythonPath;
+  }
+
   transport = new StdioClientTransport({
     command: "npx",
     args,
-    env: {
-      ...process.env,
-      VOICE_SOUNDBOARD_ARTIFACT_MODE: "path",
-    },
+    env,
   });
 
-  client = new Client({ name: "vscode-voice-soundboard", version: "0.1.0" }, {
+  client = new Client({ name: "vscode-voice-soundboard", version: "0.2.0" }, {
     capabilities: {},
   });
 

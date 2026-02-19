@@ -36,6 +36,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "requestStatus":
           await this.sendStatus();
           break;
+        case "openSettings":
+          vscode.commands.executeCommand("workbench.action.openSettings", "voiceSoundboard");
+          break;
       }
     });
 
@@ -46,6 +49,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   notifyConnected(): void {
     this.sendStatus();
+  }
+
+  notifySetupRequired(message: string, backend: string): void {
+    this.postMessage({ type: "setupRequired", message, backend });
   }
 
   private async handleSpeak(text: string, voice?: string, speed?: number): Promise<void> {

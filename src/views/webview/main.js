@@ -104,6 +104,9 @@ window.addEventListener("message", (event) => {
     case "error":
       handleError(msg.message);
       break;
+    case "setupRequired":
+      handleSetup(msg.message, msg.backend);
+      break;
   }
 });
 
@@ -301,6 +304,33 @@ function getCastAssignments() {
     }
   });
   return cast;
+}
+
+/**
+ * @param {string} message
+ * @param {string} backend
+ */
+function handleSetup(message, backend) {
+  statusChip.textContent = "Setup Required";
+  statusChip.className = "status-chip setup";
+  speakBtn.disabled = true;
+  dialoguePlayBtn.disabled = true;
+
+  // Show setup guidance in the speak tab
+  const speakTab = document.getElementById("tab-speak");
+  if (speakTab) {
+    const existing = speakTab.querySelector(".setup-banner");
+    if (existing) existing.remove();
+
+    const banner = document.createElement("div");
+    banner.className = "setup-banner";
+    banner.innerHTML = `
+      <div class="setup-icon">$(gear)</div>
+      <div class="setup-text">${message || "TTS backend setup required"}</div>
+      <button class="setup-action" onclick="vscode.postMessage({type:'openSettings'})">Open Settings</button>
+    `;
+    speakTab.insertBefore(banner, speakTab.firstChild);
+  }
 }
 
 /** @returns {Record<string, Array>} */

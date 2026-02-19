@@ -71,6 +71,11 @@ body {
   color: #f85149;
 }
 
+.status-chip.setup {
+  background: #d2992266;
+  color: #d29922;
+}
+
 /* Text areas */
 textarea {
   width: 100%;
@@ -307,4 +312,35 @@ input[type="text"]:focus {
 .cast-row select {
   flex: 1;
   margin-bottom: 0;
+}
+
+/* Setup banner */
+.setup-banner {
+  background: var(--vscode-editorWidget-background, var(--vscode-input-background));
+  border: 1px solid var(--vscode-editorWidget-border, var(--vscode-input-border));
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.setup-banner .setup-text {
+  font-size: 12px;
+  margin: 6px 0 10px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.setup-banner .setup-action {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.setup-banner .setup-action:hover {
+  background: var(--vscode-button-hoverBackground);
 }
