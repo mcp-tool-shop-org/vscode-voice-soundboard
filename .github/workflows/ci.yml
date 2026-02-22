@@ -7,6 +7,7 @@ on:
       - "test/**"
       - "package.json"
       - "tsconfig.json"
+      - "vitest.config.ts"
       - "esbuild.mjs"
       - ".github/workflows/**"
   pull_request:
@@ -15,6 +16,7 @@ on:
       - "test/**"
       - "package.json"
       - "tsconfig.json"
+      - "vitest.config.ts"
       - "esbuild.mjs"
       - ".github/workflows/**"
   workflow_dispatch:
