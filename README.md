@@ -1,4 +1,6 @@
-# Voice Soundboard for VS Code
+<p align="center">
+  <img src="assets/logo.png" alt="VSCode Voice Soundboard" width="280" />
+</p>
 
 Text-to-speech extension with 48 voices, presets, and multi-speaker dialogue — powered by [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
 
