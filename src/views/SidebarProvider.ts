@@ -1,8 +1,10 @@
 import * as vscode from "vscode";
+import * as path from "path";
 import * as mcpClient from "../mcp/client.js";
 import { isConnected } from "../mcp/lifecycle.js";
 import { playAudio, stopAudio, isPlaying } from "../audio/player.js";
 import { getConfig } from "../config.js";
+import type { DialogueLineResult, DialoguePauseResult } from "../mcp/types.js";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   private view?: vscode.WebviewView;
@@ -32,6 +34,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           break;
         case "dialogue":
           await this.handleDialogue(msg.script, msg.cast, msg.speed);
+          break;
+        case "exportDialogue":
+          await this.handleExportDialogue(msg.script, msg.cast, msg.speed);
           break;
         case "requestStatus":
           await this.sendStatus();
@@ -109,6 +114,66 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
       }
       this.postMessage({ type: "dialogueResult", totalDuration: result.totalDurationMs });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      this.postMessage({ type: "error", message: msg });
+    } finally {
+      this.postMessage({ type: "speaking", speaking: false });
+    }
+  }
+
+  private async handleExportDialogue(
+    script: string,
+    cast?: Record<string, string>,
+    speed?: number,
+  ): Promise<void> {
+    if (!script) return;
+    this.postMessage({ type: "speaking", speaking: true });
+    try {
+      const result = await mcpClient.dialogue(script, cast, speed);
+
+      // Build WebVTT
+      const lines: string[] = ["WEBVTT", ""];
+      let currentMs = 0;
+
+      for (const artifact of result.artifacts) {
+        if (artifact.type === "line") {
+          const line = artifact as DialogueLineResult;
+          const startTime = formatVttTime(currentMs);
+          const endTime = formatVttTime(currentMs + line.durationMs);
+          lines.push(`${startTime} --> ${endTime}`);
+          lines.push(`<v ${line.speaker}>${line.text}`);
+          lines.push("");
+          currentMs += line.durationMs;
+        } else if (artifact.type === "pause") {
+          const pause = artifact as DialoguePauseResult;
+          currentMs += pause.durationMs;
+        }
+      }
+
+      // Save to workspace
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+      const filename = `dialogue-${timestamp}.vtt`;
+
+      let saveUri: vscode.Uri;
+      if (workspaceFolders && workspaceFolders.length > 0) {
+        saveUri = vscode.Uri.file(path.join(workspaceFolders[0].uri.fsPath, filename));
+      } else {
+        const chosen = await vscode.window.showSaveDialog({
+          defaultUri: vscode.Uri.file(filename),
+          filters: { "WebVTT": ["vtt"], "All Files": ["*"] },
+        });
+        if (!chosen) return;
+        saveUri = chosen;
+      }
+
+      await vscode.workspace.fs.writeFile(saveUri, Buffer.from(lines.join("\n"), "utf-8"));
+      const doc = await vscode.workspace.openTextDocument(saveUri);
+      await vscode.window.showTextDocument(doc);
+      vscode.window.showInformationMessage(
+        `Dialogue exported: ${path.basename(saveUri.fsPath)} (${result.lineCount} lines, ${(result.totalDurationMs / 1000).toFixed(1)}s)`,
+      );
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       this.postMessage({ type: "error", message: msg });
@@ -202,6 +267,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     <div id="castPanel" class="cast-panel"></div>
     <div class="actions">
       <button id="dialoguePlayBtn" class="primary" disabled>Play All</button>
+      <button id="dialogueExportBtn" class="secondary" disabled>Export VTT</button>
     </div>
   </div>
 
@@ -209,6 +275,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 </body>
 </html>`;
   }
+}
+
+function formatVttTime(ms: number): string {
+  const totalSeconds = Math.floor(ms / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const millis = ms % 1000;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(millis).padStart(3, "0")}`;
 }
 
 function getNonce(): string {

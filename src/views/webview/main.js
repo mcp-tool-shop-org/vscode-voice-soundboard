@@ -30,6 +30,7 @@ const voiceList = document.getElementById("voiceList");
 const dialogueScript = /** @type {HTMLTextAreaElement} */ (document.getElementById("dialogueScript"));
 const castPanel = document.getElementById("castPanel");
 const dialoguePlayBtn = document.getElementById("dialoguePlayBtn");
+const dialogueExportBtn = document.getElementById("dialogueExportBtn");
 
 // Tab switching
 tabs.forEach((tab) => {
@@ -83,6 +84,20 @@ dialoguePlayBtn?.addEventListener("click", () => {
   });
 });
 
+// Dialogue export as WebVTT
+dialogueExportBtn?.addEventListener("click", () => {
+  const script = dialogueScript?.value?.trim();
+  if (!script) return;
+
+  const cast = getCastAssignments();
+  vscode.postMessage({
+    type: "exportDialogue",
+    script,
+    cast: Object.keys(cast).length > 0 ? cast : undefined,
+    speed: parseFloat(speedSlider?.value || "1.0"),
+  });
+});
+
 // Detect speakers in dialogue for cast assignment
 dialogueScript?.addEventListener("input", () => {
   updateCastPanel();
@@ -119,6 +134,7 @@ function handleStatus(msg) {
     statusChip.className = "status-chip ready";
     speakBtn.disabled = false;
     dialoguePlayBtn.disabled = false;
+    if (dialogueExportBtn) dialogueExportBtn.disabled = false;
 
     voices = msg.voices || [];
     presets = msg.presets || [];
@@ -137,6 +153,7 @@ function handleStatus(msg) {
     statusChip.className = "status-chip offline";
     speakBtn.disabled = true;
     dialoguePlayBtn.disabled = true;
+    if (dialogueExportBtn) dialogueExportBtn.disabled = true;
   }
 }
 
@@ -315,6 +332,7 @@ function handleSetup(message, backend) {
   statusChip.className = "status-chip setup";
   speakBtn.disabled = true;
   dialoguePlayBtn.disabled = true;
+  if (dialogueExportBtn) dialogueExportBtn.disabled = true;
 
   // Show setup guidance in the speak tab
   const speakTab = document.getElementById("tab-speak");

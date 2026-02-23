@@ -76,6 +76,11 @@
         "command": "voiceSoundboard.togglePanel",
         "title": "Toggle Soundboard Panel",
         "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.exportDialogue",
+        "title": "Export Dialogue as WebVTT",
+        "category": "Voice Soundboard"
       }
     ],
     "keybindings": [

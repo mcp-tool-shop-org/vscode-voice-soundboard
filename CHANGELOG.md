@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.1] - 2026-02-23
+
+### Added
+- **Dialogue export as WebVTT** — synthesize dialogue lines and export as `.vtt` subtitle file with cumulative timecodes and voice tags
+- "Export VTT" button in the Dialogue tab alongside "Play All"
+- Command Palette entry: `Voice Soundboard: Export Dialogue as WebVTT`
+
+### Fixed
+- README Settings table: backend default now correctly shows `python` (was `mock`)
+
 ## [0.2.0] - 2026-02-19
 
 ### Changed
