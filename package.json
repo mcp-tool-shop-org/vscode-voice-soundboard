@@ -2,7 +2,7 @@
   "name": "vscode-voice-soundboard",
   "displayName": "Voice Soundboard",
   "description": "TTS synthesis with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "mcp-tool-shop",
   "license": "MIT",
   "repository": {
@@ -100,9 +100,9 @@
         },
         "voiceSoundboard.speed": {
           "type": "number",
-          "default": 1.0,
+          "default": 1,
           "minimum": 0.5,
-          "maximum": 2.0,
+          "maximum": 2,
           "description": "Speech speed multiplier"
         },
         "voiceSoundboard.backend": {
