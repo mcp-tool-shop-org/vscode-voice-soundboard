@@ -8,6 +8,7 @@ import type { DialogueLineResult, DialoguePauseResult } from "../mcp/types.js";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   private view?: vscode.WebviewView;
+  private dialogueAbort: AbortController | null = null;
 
   constructor(private readonly extensionUri: vscode.Uri) {}
 
@@ -79,6 +80,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   private handleStop(): void {
     stopAudio();
+    this.dialogueAbort?.abort();
     mcpClient.interrupt().catch(() => {});
     this.postMessage({ type: "speaking", speaking: false });
   }
@@ -100,24 +102,39 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     speed?: number,
   ): Promise<void> {
     if (!script) return;
+    this.dialogueAbort?.abort();
+    const abort = new AbortController();
+    this.dialogueAbort = abort;
+
     this.postMessage({ type: "speaking", speaking: true });
     try {
       const result = await mcpClient.dialogue(script, cast, speed);
       // Play each line's audio sequentially
       for (const artifact of result.artifacts) {
+        if (abort.signal.aborted) break;
         if (artifact.type === "line" && artifact.audioPath) {
           playAudio(artifact.audioPath);
-          // Wait for approximate duration before playing next
-          await new Promise((r) => setTimeout(r, artifact.durationMs + 200));
+          await new Promise((r) => {
+            const timer = setTimeout(r, artifact.durationMs + 200);
+            abort.signal.addEventListener("abort", () => { clearTimeout(timer); r(undefined); }, { once: true });
+          });
         } else if (artifact.type === "pause") {
-          await new Promise((r) => setTimeout(r, artifact.durationMs));
+          await new Promise((r) => {
+            const timer = setTimeout(r, artifact.durationMs);
+            abort.signal.addEventListener("abort", () => { clearTimeout(timer); r(undefined); }, { once: true });
+          });
         }
       }
-      this.postMessage({ type: "dialogueResult", totalDuration: result.totalDurationMs });
+      if (!abort.signal.aborted) {
+        this.postMessage({ type: "dialogueResult", totalDuration: result.totalDurationMs });
+      }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      this.postMessage({ type: "error", message: msg });
+      if (!abort.signal.aborted) {
+        const msg = err instanceof Error ? err.message : String(err);
+        this.postMessage({ type: "error", message: msg });
+      }
     } finally {
+      this.dialogueAbort = null;
       this.postMessage({ type: "speaking", speaking: false });
     }
   }

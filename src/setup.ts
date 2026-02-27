@@ -9,28 +9,29 @@ interface SetupResult {
 }
 
 /** Find a working Python 3 binary. */
-function findPython(configPath: string): Promise<string | null> {
+async function findPython(configPath: string): Promise<string | null> {
   const candidates = configPath
     ? [configPath]
     : process.platform === "win32"
       ? ["python", "python3", "py -3"]
       : ["python3", "python"];
 
-  return new Promise((resolve) => {
-    let checked = 0;
-    for (const cmd of candidates) {
-      exec(`${cmd} --version`, { timeout: 5000 }, (err, stdout) => {
-        checked++;
-        if (!err && stdout.includes("Python 3")) {
-          resolve(cmd.includes(" ") ? cmd : cmd);
-          return;
-        }
-        if (checked === candidates.length) {
-          resolve(null);
-        }
+  for (const cmd of candidates) {
+    try {
+      const stdout = await new Promise<string>((resolve, reject) => {
+        exec(`${cmd} --version`, { timeout: 5000 }, (err, out) => {
+          if (err) reject(err);
+          else resolve(out);
+        });
       });
+      if (stdout.includes("Python 3")) {
+        return cmd;
+      }
+    } catch {
+      // candidate not found, try next
     }
-  });
+  }
+  return null;
 }
 
 /** Check if voice-soundboard[kokoro] is installed. */

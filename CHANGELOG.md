@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0] - 2026-02-26
+
+### Fixed
+- **Security:** Replaced innerHTML with safe DOM construction in voice cards and setup banner (XSS prevention)
+- **Security:** Switched audio player from shell `exec` to `spawn` with args array (shell injection prevention)
+- **Bug:** `findPython` race condition — parallel exec calls could resolve multiple times; now sequential
+- **Bug:** Dialogue playback can now be cancelled mid-sequence via Stop button (AbortController)
+- **Bug:** Error status chip timeout stacking — rapid errors no longer queue conflicting resets
+- **Bug:** Speaking button state now correctly resets when dialogue is cancelled mid-playback
+
 ## [0.2.2] - 2026-02-27
 
 ### Added

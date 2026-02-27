@@ -12,6 +12,7 @@ let presets = [];
 let defaultVoice = "bm_george";
 let defaultSpeed = 1.0;
 let activeFilter = "all";
+let errorTimeout = null;
 
 // Elements
 const tabs = document.querySelectorAll(".tab");
@@ -172,7 +173,9 @@ function handleSpeaking(speaking) {
 function handleError(message) {
   statusChip.textContent = `Error: ${message}`;
   statusChip.className = "status-chip offline";
-  setTimeout(() => {
+  if (errorTimeout) clearTimeout(errorTimeout);
+  errorTimeout = setTimeout(() => {
+    errorTimeout = null;
     statusChip.textContent = "Ready";
     statusChip.className = "status-chip ready";
   }, 3000);
@@ -254,16 +257,27 @@ function renderVoiceList() {
   for (const v of filtered) {
     const card = document.createElement("div");
     card.className = "voice-card";
-    card.innerHTML = `
-      <div class="info">
-        <div class="name">${v.name}</div>
-        <div class="detail">${v.accent} ${v.gender} &mdash; ${v.style}</div>
-      </div>
-      <button class="preview-btn" data-id="${v.id}" data-name="${v.name}">Preview</button>
-    `;
-    card.querySelector(".preview-btn")?.addEventListener("click", () => {
+
+    const info = document.createElement("div");
+    info.className = "info";
+    const nameEl = document.createElement("div");
+    nameEl.className = "name";
+    nameEl.textContent = v.name;
+    const detailEl = document.createElement("div");
+    detailEl.className = "detail";
+    detailEl.textContent = `${v.accent} ${v.gender} \u2014 ${v.style}`;
+    info.appendChild(nameEl);
+    info.appendChild(detailEl);
+
+    const previewBtn = document.createElement("button");
+    previewBtn.className = "preview-btn";
+    previewBtn.textContent = "Preview";
+    previewBtn.addEventListener("click", () => {
       vscode.postMessage({ type: "preview", voiceId: v.id, voiceName: v.name });
     });
+
+    card.appendChild(info);
+    card.appendChild(previewBtn);
     voiceList.appendChild(card);
   }
 }
@@ -342,11 +356,25 @@ function handleSetup(message, backend) {
 
     const banner = document.createElement("div");
     banner.className = "setup-banner";
-    banner.innerHTML = `
-      <div class="setup-icon">$(gear)</div>
-      <div class="setup-text">${message || "TTS backend setup required"}</div>
-      <button class="setup-action" onclick="vscode.postMessage({type:'openSettings'})">Open Settings</button>
-    `;
+
+    const icon = document.createElement("div");
+    icon.className = "setup-icon";
+    icon.textContent = "\u2699";
+
+    const text = document.createElement("div");
+    text.className = "setup-text";
+    text.textContent = message || "TTS backend setup required";
+
+    const btn = document.createElement("button");
+    btn.className = "setup-action";
+    btn.textContent = "Open Settings";
+    btn.addEventListener("click", () => {
+      vscode.postMessage({ type: "openSettings" });
+    });
+
+    banner.appendChild(icon);
+    banner.appendChild(text);
+    banner.appendChild(btn);
     speakTab.insertBefore(banner, speakTab.firstChild);
   }
 }
