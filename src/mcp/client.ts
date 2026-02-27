@@ -14,7 +14,7 @@ function requireClient() {
   return client;
 }
 
-function parseToolResult(result: { content: Array<{ type: string; text?: string }> }): unknown {
+export function parseToolResult(result: { content: Array<{ type: string; text?: string }> }): unknown {
   const textContent = result.content.find((c) => c.type === "text");
   if (!textContent?.text) {
     throw new Error("Empty response from MCP server");

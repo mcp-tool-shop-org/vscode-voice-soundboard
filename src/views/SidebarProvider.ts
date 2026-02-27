@@ -294,7 +294,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   }
 }
 
-function formatVttTime(ms: number): string {
+export function formatVttTime(ms: number): string {
   const totalSeconds = Math.floor(ms / 1000);
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
