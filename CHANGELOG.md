@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0] - 2026-02-27
+
+### Changed
+- **v1.0.0 stable release** — production-ready
+
 ## [0.3.2] - 2026-02-27
 
 ### Added
