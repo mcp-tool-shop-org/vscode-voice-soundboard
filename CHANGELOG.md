@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1] - 2026-02-27
+
+### Added
+- **Unit tests:** 102 tests across 7 files — config, MCP client/lifecycle, audio player, commands, backend setup, SidebarProvider
+- Vitest configuration with vscode module mock
+- Exported `parseToolResult` and `formatVttTime` for testability
+
 ## [0.3.0] - 2026-02-26
 
 ### Fixed
