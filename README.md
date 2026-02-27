@@ -60,4 +60,4 @@ The exported `.vtt` file uses voice tags (`<v Speaker>`) and can be used with vi
 
 ## License
 
-MIT
+MIT — Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>

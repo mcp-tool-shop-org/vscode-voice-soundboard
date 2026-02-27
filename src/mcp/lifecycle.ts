@@ -40,7 +40,7 @@ export async function startServer(config: ExtensionConfig): Promise<Client> {
     env,
   });
 
-  client = new Client({ name: "vscode-voice-soundboard", version: "0.2.0" }, {
+  client = new Client({ name: "vscode-voice-soundboard", version: "0.2.2" }, {
     capabilities: {},
   });
 
