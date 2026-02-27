@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.2] - 2026-02-27
+
+### Added
+- SECURITY.md — vulnerability reporting policy
+- CI coverage reporting with Codecov upload
+- Codecov badge in README
+- Quality scorecard in README and landing page (45/50)
+- Privacy section in README
+
+### Changed
+- Landing page footer standardized to MCP Tool Shop link
+- Updated translations (7 languages)
+
 ## [0.3.1] - 2026-02-27
 
 ### Added

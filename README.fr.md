@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>English</strong> | <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português</a>
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.md">English</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
 </p>
 
 <p align="center">
@@ -9,63 +9,77 @@
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/vscode-voice-soundboard/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/vscode-voice-soundboard/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=mcp-tool-shop.vscode-voice-soundboard"><img src="https://img.shields.io/visual-studio-marketplace/v/mcp-tool-shop.vscode-voice-soundboard.svg" alt="Marketplace"></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/vscode-voice-soundboard"><img src="https://img.shields.io/codecov/c/github/mcp-tool-shop-org/vscode-voice-soundboard" alt="Coverage"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a>
   <a href="https://mcp-tool-shop-org.github.io/vscode-voice-soundboard/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
 
-Extension de synthèse vocale avec 48 voix, des préréglages et un système de dialogue multi-haut-parleurs, alimentée par [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
+Extension de synthèse vocale avec 48 voix, des préréglages et un dialogue multi-locuteurs, alimentée par [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
 
-## Caractéristiques
+## Fonctionnalités
 
-- **Panneau latéral** avec les onglets "Parole", "Voix" et "Dialogue".
-- **48 voix** disponibles dans 9 langues (anglais, japonais, mandarin, espagnol, français, hindi, italien, portugais).
-- **5 préréglages** : Assistant, Narrateur, Annonceur, Conte, Murmure.
-- **Dialogue multi-voix** : rédigez des scripts, attribuez des voix et lancez la lecture de tous les éléments.
-- **Sélection vocale** : sélectionnez du code ou du texte et appuyez sur `Ctrl+Shift+S`.
-- Lecture audio **compatible avec plusieurs plateformes** (Windows, macOS, Linux).
+- **Panneau latéral** avec les onglets Parler, Voix et Dialogue
+- **48 voix** dans 9 langues (anglais, japonais, mandarin, espagnol, français, hindi, italien, portugais)
+- **5 préréglages** : Assistant, Narrateur, Annonceur, Conte, Murmure
+- **Dialogue multi-locuteurs** : écrivez des scripts, attribuez des voix, lancez la lecture
+- **Sélection vocale** : sélectionnez du code ou du texte et appuyez sur `Ctrl+Shift+S`
+- Lecture audio multiplateforme (Windows, macOS, Linux)
 
 ## Premiers pas
 
-1. Installez l'extension.
-2. Le serveur de la barre de sons vocales MCP démarre automatiquement.
-3. Cliquez sur l'icône du microphone dans la barre d'activité.
-4. Tapez du texte et cliquez sur le bouton **Parler**.
+1. Installez l'extension
+2. Le serveur MCP Voice Soundboard démarre automatiquement
+3. Cliquez sur l'icône du microphone dans la barre d'activité
+4. Tapez du texte et cliquez sur **Parler**
 
 ## Commandes
 
-| Commande. | Raccourci. | Description. |
-| Veuillez fournir le texte à traduire. | Bien sûr, veuillez me fournir le texte que vous souhaitez que je traduise. | Veuillez fournir le texte à traduire. |
-| Tableau de sons vocaux : Parler le texte... | — | Entrez le texte que vous souhaitez entendre. |
-| Tableau de sons vocaux : Sélection de la voix. | `Ctrl+Shift+S` | Prononcer le texte sélectionné par l'éditeur. |
-| Tableau de sons vocaux : Arrêtez de parler. | — | Arrêter la lecture en cours. |
-| Tableau de sons vocaux : Modifier la voix. | — | Sélecteur vocal à accès rapide. |
-| Tableau de commandes vocales : Basculer le panneau. | — | Afficher/masquer la barre latérale. |
-| Tableau de sons vocaux : Exporter les dialogues au format WebVTT. | — | Exporter le script de dialogue au format `.vtt`, qui est un fichier de sous-titres. |
+| Commande | Raccourci | Description |
+|---------|----------|-------------|
+| Tableau de voix : Parler le texte... | — | Entrez le texte à prononcer |
+| Tableau de voix : Parler la sélection | `Ctrl+Shift+S` | Prononcez le texte sélectionné dans l'éditeur |
+| Tableau de voix : Arrêter la lecture | — | Arrête la lecture en cours |
+| Tableau de voix : Changer de voix | — | Sélection rapide de la voix |
+| Tableau de voix : Afficher/masquer le panneau | — | Affiche/masque le panneau latéral |
+| Tableau de voix : Exporter le dialogue au format WebVTT | — | Exportez le script de dialogue au format de fichier de sous-titres `.vtt` |
 
-## Dialogue Export
+## Exportation du dialogue
 
-Dans l'onglet "Dialogue", rédigez un script avec plusieurs intervenants, attribuez des voix, puis cliquez sur **Exporter en VTT**. L'extension synthétise chaque réplique, calcule les horodatages cumulatifs en fonction de la durée de l'audio, et enregistre un fichier de sous-titres au format [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
+Écrivez un script multi-locuteurs dans l'onglet Dialogue, attribuez des voix, puis cliquez sur **Exporter VTT**. L'extension synthétise chaque ligne, calcule les horodatages cumulatifs à partir des durées audio et enregistre un fichier de sous-titres [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
 
-Le fichier `.vtt` exporté utilise des balises vocales (`<v Speaker>`) et peut être utilisé avec des lecteurs vidéo, des éditeurs de sous-titres ou des outils d'accessibilité.
+Le fichier `.vtt` exporté utilise des balises de voix (`<v Speaker>`) et peut être utilisé avec des lecteurs vidéo, des éditeurs de sous-titres ou des outils d'accessibilité.
 
 ## Paramètres
 
-| Cadre.
-Contexte.
-Décor.
-Lieu.
-Environnement.
-Installation.
-Réglage.
-Configuration.
-Mise en place. | Par défaut. | Description. |
-| Veuillez fournir le texte à traduire. | Veuillez fournir le texte à traduire. | Veuillez fournir le texte à traduire. |
-| `voiceSoundboard.defaultVoice` | `bm_george` | Identifiant vocal par défaut. |
-| `voiceSoundboard.speed` | `1.0` | Vitesse de la parole (0,5–2,0). |
-| `voiceSoundboard.backend` | `python` | Serveur de traitement de la parole (en Python, via HTTP, avec possibilité de simulation). |
-| `voiceSoundboard.autoStart` | `true` | Démarrer automatiquement le serveur lors de l'activation. |
-| `voiceSoundboard.format` | `wav` | Format de sortie audio. |
+| Paramètre | Valeur par défaut | Description |
+|---------|---------|-------------|
+| `voiceSoundboard.defaultVoice` | `bm_george` | ID de voix par défaut |
+| `voiceSoundboard.speed` | `1.0` | Vitesse de parole (0,5–2,0) |
+| `voiceSoundboard.backend` | `python` | Backend TTS (python/http/mock) |
+| `voiceSoundboard.autoStart` | `true` | Démarrer automatiquement le serveur à l'activation |
+| `voiceSoundboard.format` | `wav` | Format de sortie audio |
+
+## Confidentialité
+
+En mode Python local (par défaut), toute la synthèse vocale s'effectue sur votre machine. Aucun texte n'est envoyé. En mode HTTP, le texte est envoyé au fournisseur cloud configuré (OpenAI/ElevenLabs) conformément à leurs conditions d'utilisation de l'API. Aucune télémétrie.
+
+## Tableau de bord
+
+| Catégorie | Score | Notes |
+|----------|-------|-------|
+| A. Sécurité | 9/10 | SECURITY.md, par défaut uniquement local, clés API chiffrées dans le stockage de VS Code |
+| B. Gestion des erreurs | 8/10 | Démarrage automatique du backend, repli gracieux, messages d'état |
+| C. Documentation pour l'utilisateur | 9/10 | README, CHANGELOG, page d'accueil, documentation des paramètres |
+| D. Qualité du code | 9/10 | CI + tests (102), Marketplace de VS Code, couverture Codecov |
+| E. Identité | 10/10 | Logo, traductions, page d'accueil, fiche Marketplace |
+| **Total** | **45/50** | |
 
 ## Licence
 
-MIT.
+MIT
+
+---
+
+<p align="center">
+  Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>

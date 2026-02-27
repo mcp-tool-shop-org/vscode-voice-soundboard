@@ -47,7 +47,13 @@ jobs:
         run: npm run build
 
       - name: Test
-        run: npm test
+        run: npm test -- --coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: vscode
 
       - name: Package VSIX
         run: npx vsce package --no-dependencies

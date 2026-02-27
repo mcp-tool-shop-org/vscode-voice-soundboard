@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>English</strong> | <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português</a>
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
 </p>
 
 <p align="center">
@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/vscode-voice-soundboard/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/vscode-voice-soundboard/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=mcp-tool-shop.vscode-voice-soundboard"><img src="https://img.shields.io/visual-studio-marketplace/v/mcp-tool-shop.vscode-voice-soundboard.svg" alt="Marketplace"></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/vscode-voice-soundboard"><img src="https://img.shields.io/codecov/c/github/mcp-tool-shop-org/vscode-voice-soundboard" alt="Coverage"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a>
   <a href="https://mcp-tool-shop-org.github.io/vscode-voice-soundboard/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
@@ -58,6 +59,27 @@ The exported `.vtt` file uses voice tags (`<v Speaker>`) and can be used with vi
 | `voiceSoundboard.autoStart` | `true` | Auto-start server on activation |
 | `voiceSoundboard.format` | `wav` | Audio output format |
 
+## Privacy
+
+In local Python mode (the default), all speech synthesis happens on your machine. No text is sent anywhere. In HTTP mode, text is sent to the configured cloud provider (OpenAI/ElevenLabs) per their API terms. No telemetry.
+
+## Scorecard
+
+| Category | Score | Notes |
+|----------|-------|-------|
+| A. Security | 9/10 | SECURITY.md, local-only default, API keys in VS Code encrypted storage |
+| B. Error Handling | 8/10 | Backend auto-start, graceful fallback, status messages |
+| C. Operator Docs | 9/10 | README, CHANGELOG, landing page, settings docs |
+| D. Shipping Hygiene | 9/10 | CI + tests (102), VS Code Marketplace, Codecov coverage |
+| E. Identity | 10/10 | Logo, translations, landing page, Marketplace listing |
+| **Total** | **45/50** | |
+
 ## License
 
-MIT — Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+MIT
+
+---
+
+<p align="center">
+  Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>

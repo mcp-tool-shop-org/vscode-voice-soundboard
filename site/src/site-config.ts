@@ -6,7 +6,7 @@ export const config: SiteConfig = {
   logoBadge: 'VS',
   brandName: 'Voice Soundboard',
   repoUrl: 'https://github.com/mcp-tool-shop-org/vscode-voice-soundboard',
-  footerText: 'MIT Licensed — built by <a href="https://github.com/mcp-tool-shop-org" style="color:var(--color-muted);text-decoration:underline">mcp-tool-shop-org</a>',
+  footerText: 'MIT Licensed — built by <a href="https://mcp-tool-shop.github.io/" style="color:var(--color-muted);text-decoration:underline">MCP Tool Shop</a>',
 
   hero: {
     badge: 'VS Code Extension',
@@ -111,6 +111,20 @@ export const config: SiteConfig = {
           signature: 'voiceSoundboard.openaiApiKey: string',
           description: 'API key for the http backend (OpenAI, ElevenLabs, Azure). Leave empty for local Python/Kokoro.',
         },
+      ],
+    },
+    {
+      kind: 'data-table',
+      id: 'scorecard',
+      title: 'Quality scorecard',
+      subtitle: 'Ship Gate audit — 45/50.',
+      columns: ['Category', 'Score', 'Notes'],
+      rows: [
+        ['A. Security', '9/10', 'SECURITY.md, local-only default, API keys in VS Code encrypted storage'],
+        ['B. Error Handling', '8/10', 'Backend auto-start, graceful fallback, status messages'],
+        ['C. Operator Docs', '9/10', 'README, CHANGELOG, landing page, settings docs'],
+        ['D. Shipping Hygiene', '9/10', 'CI + tests (102), VS Code Marketplace, Codecov coverage'],
+        ['E. Identity', '10/10', 'Logo, translations, landing page, Marketplace listing'],
       ],
     },
   ],
