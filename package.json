@@ -2,7 +2,7 @@
   "name": "vscode-voice-soundboard",
   "displayName": "Voice Soundboard",
   "description": "TTS synthesis with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "publisher": "mcp-tool-shop",
   "license": "MIT",
   "repository": {
