@@ -155,7 +155,8 @@
     "test": "vitest run",
     "lint": "tsc --noEmit",
     "package": "vsce package",
-    "publish": "vsce publish"
+    "publish": "vsce publish",
+    "verify": "npm test && npm run lint && npm run build && npx vsce package --no-dependencies"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0"

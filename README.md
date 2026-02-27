@@ -59,20 +59,12 @@ The exported `.vtt` file uses voice tags (`<v Speaker>`) and can be used with vi
 | `voiceSoundboard.autoStart` | `true` | Auto-start server on activation |
 | `voiceSoundboard.format` | `wav` | Audio output format |
 
-## Privacy
+## Security & Data Scope
 
-In local Python mode (the default), all speech synthesis happens on your machine. No text is sent anywhere. In HTTP mode, text is sent to the configured cloud provider (OpenAI/ElevenLabs) per their API terms. No telemetry.
-
-## Scorecard
-
-| Category | Score | Notes |
-|----------|-------|-------|
-| A. Security | 9/10 | SECURITY.md, local-only default, API keys in VS Code encrypted storage |
-| B. Error Handling | 8/10 | Backend auto-start, graceful fallback, status messages |
-| C. Operator Docs | 9/10 | README, CHANGELOG, landing page, settings docs |
-| D. Shipping Hygiene | 9/10 | CI + tests (102), VS Code Marketplace, Codecov coverage |
-| E. Identity | 10/10 | Logo, translations, landing page, Marketplace listing |
-| **Total** | **45/50** | |
+- **Local backend (default):** Python/Kokoro TTS runs entirely on your machine — no network egress
+- **Cloud backend (optional):** sends text to user-configured TTS API (OpenAI/ElevenLabs) — requires explicit API key
+- **Audio playback:** uses `spawn` with args array, not shell — see [SECURITY.md](SECURITY.md) for details
+- **No telemetry** is collected or sent
 
 ## License
 

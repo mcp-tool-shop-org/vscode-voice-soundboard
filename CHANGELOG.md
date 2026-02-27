@@ -2,21 +2,16 @@
 
 ## [1.0.0] - 2026-02-27
 
-### Changed
-- **v1.0.0 stable release** — production-ready
-
-## [0.3.2] - 2026-02-27
-
 ### Added
-- SECURITY.md — vulnerability reporting policy
+- SECURITY.md with real data scope (TTS backends, audio playback, API key handling)
+- README threat model paragraph (Security & Data Scope section)
+- `verify` script for one-command test + lint + build + package
+- Dependency audit job in CI
 - CI coverage reporting with Codecov upload
-- Codecov badge in README
-- Quality scorecard in README and landing page (45/50)
-- Privacy section in README
+- SHIP_GATE.md and SCORECARD.md (Shipcheck compliance)
 
 ### Changed
-- Landing page footer standardized to MCP Tool Shop link
-- Updated translations (7 languages)
+- Bumped to 1.0.0 — production ready
 
 ## [0.3.1] - 2026-02-27
 
