@@ -16,19 +16,19 @@
 
 Extensão de texto para fala com 48 vozes, predefinições e diálogo multi-alto-falante — alimentada por [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
 
-## Recursos
+## Características
 
 - **Painel lateral** com abas "Falar", "Vozes" e "Diálogo"
 - **48 vozes** em 9 idiomas (inglês, japonês, mandarim, espanhol, francês, hindi, italiano, português)
-- **5 predefinições** — Assistente, Narrador, Apresentador, Contador de Histórias, Sussurro
+- **5 predefinições** — Assistente, Narrador, Locutor, Contador de histórias, Sussurro
 - **Diálogo multi-alto-falante** — escreva roteiros, atribua vozes, reproduza tudo
-- **Seleção de Fala** — destaque o código ou o texto e pressione `Ctrl+Shift+S`
-- Reprodução de áudio compatível com diversas plataformas (Windows, macOS, Linux)
+- **Seleção de fala** — destaque código ou texto e pressione `Ctrl+Shift+S`
+- Reprodução de áudio **multiplataforma** (Windows, macOS, Linux)
 
-## Como Começar
+## Como começar
 
 1. Instale a extensão
-2. O servidor MCP Voice Soundboard inicia automaticamente
+2. O servidor do MCP Voice Soundboard inicia automaticamente
 3. Clique no ícone do microfone na barra de atividades
 4. Digite o texto e clique em **Falar**
 
@@ -36,16 +36,16 @@ Extensão de texto para fala com 48 vozes, predefinições e diálogo multi-alto
 
 | Comando | Atalho | Descrição |
 |---------|----------|-------------|
-| Voice Soundboard: Falar Texto... | — | Digite o texto a ser falado |
-| Voice Soundboard: Falar Seleção | `Ctrl+Shift+S` | Fala o texto selecionado no editor |
-| Voice Soundboard: Parar de Falar | — | Interrompe a reprodução atual |
-| Voice Soundboard: Mudar Voz | — | Seletor rápido de voz |
-| Voice Soundboard: Alternar Painel | — | Mostra/oculta o painel lateral |
-| Voice Soundboard: Exportar Diálogo como WebVTT | — | Exporta o roteiro do diálogo como um arquivo de legenda `.vtt` |
+| Voice Soundboard: Falar texto... | — | Digite o texto a ser falado |
+| Voice Soundboard: Falar seleção | `Ctrl+Shift+S` | Fala o texto selecionado no editor |
+| Voice Soundboard: Parar de falar | — | Interrompe a reprodução atual |
+| Voice Soundboard: Alterar voz | — | Seletor rápido de voz |
+| Voice Soundboard: Alternar painel | — | Mostra/oculta o painel lateral |
+| Voice Soundboard: Exportar diálogo como WebVTT | — | Exporta o roteiro do diálogo como um arquivo de legenda `.vtt` |
 
-## Exportação de Diálogo
+## Exportação de diálogo
 
-Escreva um roteiro multi-alto-falante na aba "Diálogo", atribua vozes e, em seguida, clique em **Exportar VTT**. A extensão sintetiza cada linha, calcula os tempos cumulativos a partir das durações do áudio e salva um arquivo de legenda [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
+Escreva um roteiro multi-alto-falante na aba "Diálogo", atribua vozes e, em seguida, clique em **Exportar VTT**. A extensão sintetiza cada linha, calcula os códigos de tempo cumulativos a partir das durações do áudio e salva um arquivo de legenda [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
 
 O arquivo `.vtt` exportado usa tags de voz (`<v Speaker>`) e pode ser usado com players de vídeo, editores de legendas ou ferramentas de acessibilidade.
 
@@ -53,26 +53,18 @@ O arquivo `.vtt` exportado usa tags de voz (`<v Speaker>`) e pode ser usado com 
 
 | Configuração | Padrão | Descrição |
 |---------|---------|-------------|
-| `voiceSoundboard.defaultVoice` | `bm_george` | ID de voz padrão |
+| `voiceSoundboard.defaultVoice` | `bm_george` | ID da voz padrão |
 | `voiceSoundboard.speed` | `1.0` | Velocidade da fala (0,5–2,0) |
 | `voiceSoundboard.backend` | `python` | Backend TTS (python/http/mock) |
 | `voiceSoundboard.autoStart` | `true` | Iniciar automaticamente o servidor na ativação |
 | `voiceSoundboard.format` | `wav` | Formato de saída de áudio |
 
-## Privacidade
+## Segurança e escopo de dados
 
-No modo Python local (o padrão), toda a síntese de fala ocorre na sua máquina. Nenhum texto é enviado para lugar nenhum. No modo HTTP, o texto é enviado para o provedor de nuvem configurado (OpenAI/ElevenLabs) de acordo com seus termos de API. Sem telemetria.
-
-## Avaliação
-
-| Categoria | Pontuação | Observações |
-|----------|-------|-------|
-| A. Segurança | 9/10 | SECURITY.md, padrão somente local, chaves de API criptografadas no armazenamento do VS Code |
-| B. Tratamento de Erros | 8/10 | Inicialização automática do backend, fallback suave, mensagens de status |
-| C. Documentação para Usuários | 9/10 | README, CHANGELOG, página inicial, documentação de configurações |
-| D. Higiene de Distribuição | 9/10 | CI + testes (102), Marketplace do VS Code, cobertura Codecov |
-| E. Identidade | 10/10 | Logo, traduções, página inicial, listagem no Marketplace |
-| **Total** | **45/50** | |
+- **Backend local (padrão):** O Python/Kokoro TTS é executado inteiramente na sua máquina — sem tráfego de rede.
+- **Backend na nuvem (opcional):** envia texto para uma API TTS configurada pelo usuário (OpenAI/ElevenLabs) — requer uma chave de API explícita.
+- **Reprodução de áudio:** usa `spawn` com um array de argumentos, e não com o shell — veja [SECURITY.md](SECURITY.md) para detalhes.
+- **Nenhum** dado de telemetria é coletado ou enviado.
 
 ## Licença
 

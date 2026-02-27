@@ -14,7 +14,7 @@
   <a href="https://mcp-tool-shop-org.github.io/vscode-voice-soundboard/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
 
-Estensione di sintesi vocale con 48 voci, impostazioni predefinite e dialogo multivoce, basata su [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
+Estensione di sintesi vocale con 48 voci, impostazioni predefinite e dialogo multivoce, alimentata da [MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard).
 
 ## Funzionalità
 
@@ -22,8 +22,8 @@ Estensione di sintesi vocale con 48 voci, impostazioni predefinite e dialogo mul
 - **48 voci** in 9 lingue (inglese, giapponese, cinese mandarino, spagnolo, francese, hindi, italiano, portoghese)
 - **5 impostazioni predefinite** — Assistente, Narratore, Annunciatore, Raccontastorie, Sussurro
 - **Dialogo multivoce** — scrivi script, assegna voci, riproduci tutto
-- **Selezione vocale** — evidenzia codice o testo e premi `Ctrl+Shift+S`
-- Riproduzione audio compatibile con diverse piattaforme (Windows, macOS, Linux)
+- **Selezione della voce** — evidenzia il codice o il testo e premi `Ctrl+Shift+S`
+- Riproduzione audio **cross-platform** (Windows, macOS, Linux)
 
 ## Come iniziare
 
@@ -45,7 +45,7 @@ Estensione di sintesi vocale con 48 voci, impostazioni predefinite e dialogo mul
 
 ## Esportazione del dialogo
 
-Scrivi uno script multivoce nella scheda "Dialogo", assegna le voci e poi clicca su **Esporta VTT**. L'estensione sintetizza ogni riga, calcola i timestamp cumulativi in base alla durata dell'audio e salva un file di sottotitoli [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
+Scrivi uno script multivoce nella scheda "Dialogo", assegna le voci, quindi clicca su **Esporta VTT**. L'estensione sintetizza ogni riga, calcola i timestamp cumulativi in base alla durata dell'audio e salva un file di sottotitoli [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
 
 Il file `.vtt` esportato utilizza tag vocali (`<v Speaker>`) e può essere utilizzato con lettori video, editor di sottotitoli o strumenti di accessibilità.
 
@@ -57,22 +57,14 @@ Il file `.vtt` esportato utilizza tag vocali (`<v Speaker>`) e può essere utili
 | `voiceSoundboard.speed` | `1.0` | Velocità del parlato (0.5–2.0) |
 | `voiceSoundboard.backend` | `python` | Backend TTS (python/http/mock) |
 | `voiceSoundboard.autoStart` | `true` | Avvia automaticamente il server all'attivazione |
-| `voiceSoundboard.format` | `wav` | Formato dell'output audio |
+| `voiceSoundboard.format` | `wav` | Formato dell'uscita audio |
 
-## Privacy
+## Sicurezza e ambito dei dati
 
-In modalità Python locale (predefinita), tutta la sintesi vocale avviene sulla tua macchina. Nessun testo viene inviato da nessuna parte. In modalità HTTP, il testo viene inviato al provider cloud configurato (OpenAI/ElevenLabs) in base ai loro termini di servizio API. Nessuna raccolta di dati di telemetria.
-
-## Valutazione
-
-| Categoria | Punteggio | Note |
-|----------|-------|-------|
-| A. Sicurezza | 9/10 | SECURITY.md, solo locale per impostazione predefinita, chiavi API crittografate nello storage di VS Code |
-| B. Gestione degli errori | 8/10 | Avvio automatico del backend, fallback graduale, messaggi di stato |
-| C. Documentazione per l'utente | 9/10 | README, CHANGELOG, pagina di presentazione, documentazione delle impostazioni |
-| D. Qualità del codice | 9/10 | CI + test (102), VS Code Marketplace, copertura Codecov |
-| E. Identità | 10/10 | Logo, traduzioni, pagina di presentazione, inserzione nel Marketplace |
-| **Total** | **45/50** | |
+- **Backend locale (predefinito):** Python/Kokoro TTS viene eseguito interamente sulla tua macchina: nessuna connessione di rete in uscita.
+- **Backend cloud (opzionale):** invia il testo a un'API TTS configurata dall'utente (OpenAI/ElevenLabs): richiede una chiave API esplicita.
+- **Riproduzione audio:** utilizza `spawn` con un array di argomenti, non la shell: consulta [SECURITY.md](SECURITY.md) per i dettagli.
+- Non vengono raccolti o inviati dati di telemetria.
 
 ## Licenza
 

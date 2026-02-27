@@ -18,34 +18,34 @@ Extensión de texto a voz con 48 voces, preajustes y diálogo multivoz, impulsad
 
 ## Características
 
-- **Panel lateral** con pestañas de "Hablar", "Voces" y "Diálogo"
-- **48 voces** en 9 idiomas (inglés, japonés, mandarín, español, francés, hindi, italiano, portugués)
-- **5 preajustes** — Asistente, Narrador, Locutor, Cuentacuentos, Susurro
-- **Diálogo multivoz** — escribe guiones, asigna voces, reproduce todo
-- **Selección de voz** — resalta código o texto y presiona `Ctrl+Shift+S`
-- Reproducción de audio multiplataforma (Windows, macOS, Linux)
+- **Panel lateral** con pestañas de "Hablar", "Voces" y "Diálogo".
+- **48 voces** en 9 idiomas (inglés, japonés, mandarín, español, francés, hindi, italiano, portugués).
+- **5 preajustes:** Asistente, Narrador, Locutor, Cuentacuentos, Susurro.
+- **Diálogo multivoz:** escriba guiones, asigne voces y reproduzca todo.
+- **Selección de voz:** resalte código o texto y presione `Ctrl+Shift+S`.
+- Reproducción de audio multiplataforma (Windows, macOS, Linux).
 
 ## Cómo empezar
 
-1. Instala la extensión
-2. El servidor de MCP Voice Soundboard se inicia automáticamente
-3. Haz clic en el icono del micrófono en la barra de actividad
-4. Escribe texto y haz clic en **Hablar**
+1. Instale la extensión.
+2. El servidor de MCP Voice Soundboard se inicia automáticamente.
+3. Haga clic en el icono del micrófono en la barra de actividad.
+4. Escriba texto y haga clic en **Hablar**.
 
 ## Comandos
 
 | Comando | Atajo | Descripción |
 |---------|----------|-------------|
-| Voice Soundboard: Hablar texto... | — | Escribe el texto que deseas que se pronuncie |
-| Voice Soundboard: Hablar selección | `Ctrl+Shift+S` | Pronuncia el texto seleccionado en el editor |
-| Voice Soundboard: Detener reproducción | — | Detiene la reproducción actual |
-| Voice Soundboard: Cambiar voz | — | Selector rápido de voz |
-| Voice Soundboard: Alternar panel | — | Muestra/oculta el panel lateral |
-| Voice Soundboard: Exportar diálogo como WebVTT | — | Exporta el guion del diálogo como un archivo de subtítulos `.vtt` |
+| Voice Soundboard: Hablar texto... | — | Ingrese el texto que desea que se lea. |
+| Voice Soundboard: Hablar selección | `Ctrl+Shift+S` | Reproduce el texto seleccionado en el editor. |
+| Voice Soundboard: Detener reproducción | — | Detiene la reproducción actual. |
+| Voice Soundboard: Cambiar voz | — | Selector rápido de voz. |
+| Voice Soundboard: Alternar panel | — | Muestra u oculta el panel lateral. |
+| Voice Soundboard: Exportar diálogo como WebVTT | — | Exporta el guion del diálogo como un archivo de subtítulos `.vtt`. |
 
 ## Exportación de diálogo
 
-Escribe un guion multivoz en la pestaña "Diálogo", asigna voces y luego haz clic en **Exportar VTT**. La extensión sintetiza cada línea, calcula los tiempos totales a partir de la duración del audio y guarda un archivo de subtítulos [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
+Escriba un guion multivoz en la pestaña de "Diálogo", asigne voces y luego haga clic en **Exportar VTT**. La extensión sintetiza cada línea, calcula los códigos de tiempo acumulativos a partir de las duraciones de audio y guarda un archivo de subtítulos [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
 
 El archivo `.vtt` exportado utiliza etiquetas de voz (`<v Speaker>`) y se puede utilizar con reproductores de video, editores de subtítulos o herramientas de accesibilidad.
 
@@ -59,20 +59,12 @@ El archivo `.vtt` exportado utiliza etiquetas de voz (`<v Speaker>`) y se puede 
 | `voiceSoundboard.autoStart` | `true` | Iniciar automáticamente el servidor al activar |
 | `voiceSoundboard.format` | `wav` | Formato de salida de audio |
 
-## Privacidad
+## Seguridad y alcance de datos
 
-En el modo local de Python (el predeterminado), toda la síntesis de voz se realiza en tu máquina. Ningún texto se envía a ningún lugar. En el modo HTTP, el texto se envía al proveedor de la nube configurado (OpenAI/ElevenLabs) de acuerdo con sus términos de API. No se recopila telemetría.
-
-## Informe de rendimiento
-
-| Categoría | Puntuación | Notas |
-|----------|-------|-------|
-| A. Seguridad | 9/10 | SECURITY.md, solo local por defecto, claves de API en el almacenamiento cifrado de VS Code |
-| B. Manejo de errores | 8/10 | Inicio automático del backend, recuperación elegante, mensajes de estado |
-| C. Documentación para el usuario | 9/10 | README, CHANGELOG, página de inicio, documentación de la configuración |
-| D. Higiene de la implementación | 9/10 | CI + pruebas (102), Mercado de VS Code, cobertura de Codecov |
-| E. Identidad | 10/10 | Logotipo, traducciones, página de inicio, listado en el Marketplace |
-| **Total** | **45/50** | |
+- **Backend local (predeterminado):** Python/Kokoro TTS se ejecuta completamente en su máquina; no hay salida de red.
+- **Backend en la nube (opcional):** envía texto a una API de TTS configurada por el usuario (OpenAI/ElevenLabs); requiere una clave de API explícita.
+- **Reproducción de audio:** utiliza `spawn` con un array de argumentos, no con la shell; consulte [SECURITY.md](SECURITY.md) para obtener más detalles.
+- No se recopila ni se envía ninguna información de telemetría.
 
 ## Licencia
 

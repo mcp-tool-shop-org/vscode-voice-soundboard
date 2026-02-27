@@ -18,10 +18,10 @@ Extension de synthèse vocale avec 48 voix, des préréglages et un dialogue mul
 
 ## Fonctionnalités
 
-- **Panneau latéral** avec les onglets Parler, Voix et Dialogue
+- **Panneau latéral** avec les onglets "Parler", "Voix" et "Dialogue"
 - **48 voix** dans 9 langues (anglais, japonais, mandarin, espagnol, français, hindi, italien, portugais)
 - **5 préréglages** : Assistant, Narrateur, Annonceur, Conte, Murmure
-- **Dialogue multi-locuteurs** : écrivez des scripts, attribuez des voix, lancez la lecture
+- **Dialogue multi-locuteurs** : écrivez des scripts, attribuez des voix, lancez la lecture de tous
 - **Sélection vocale** : sélectionnez du code ou du texte et appuyez sur `Ctrl+Shift+S`
 - Lecture audio multiplateforme (Windows, macOS, Linux)
 
@@ -39,13 +39,13 @@ Extension de synthèse vocale avec 48 voix, des préréglages et un dialogue mul
 | Tableau de voix : Parler le texte... | — | Entrez le texte à prononcer |
 | Tableau de voix : Parler la sélection | `Ctrl+Shift+S` | Prononcez le texte sélectionné dans l'éditeur |
 | Tableau de voix : Arrêter la lecture | — | Arrête la lecture en cours |
-| Tableau de voix : Changer de voix | — | Sélection rapide de la voix |
+| Tableau de voix : Changer de voix | — | Sélecteur de voix rapide |
 | Tableau de voix : Afficher/masquer le panneau | — | Affiche/masque le panneau latéral |
 | Tableau de voix : Exporter le dialogue au format WebVTT | — | Exportez le script de dialogue au format de fichier de sous-titres `.vtt` |
 
 ## Exportation du dialogue
 
-Écrivez un script multi-locuteurs dans l'onglet Dialogue, attribuez des voix, puis cliquez sur **Exporter VTT**. L'extension synthétise chaque ligne, calcule les horodatages cumulatifs à partir des durées audio et enregistre un fichier de sous-titres [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
+Écrivez un script multi-locuteurs dans l'onglet "Dialogue", attribuez des voix, puis cliquez sur **Exporter VTT**. L'extension synthétise chaque ligne, calcule les horodatages cumulatifs à partir des durées audio et enregistre un fichier de sous-titres [WebVTT](https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API).
 
 Le fichier `.vtt` exporté utilise des balises de voix (`<v Speaker>`) et peut être utilisé avec des lecteurs vidéo, des éditeurs de sous-titres ou des outils d'accessibilité.
 
@@ -54,25 +54,17 @@ Le fichier `.vtt` exporté utilise des balises de voix (`<v Speaker>`) et peut �
 | Paramètre | Valeur par défaut | Description |
 |---------|---------|-------------|
 | `voiceSoundboard.defaultVoice` | `bm_george` | ID de voix par défaut |
-| `voiceSoundboard.speed` | `1.0` | Vitesse de parole (0,5–2,0) |
+| `voiceSoundboard.speed` | `1.0` | Vitesse de la parole (0,5–2,0) |
 | `voiceSoundboard.backend` | `python` | Backend TTS (python/http/mock) |
 | `voiceSoundboard.autoStart` | `true` | Démarrer automatiquement le serveur à l'activation |
 | `voiceSoundboard.format` | `wav` | Format de sortie audio |
 
-## Confidentialité
+## Sécurité et portée des données
 
-En mode Python local (par défaut), toute la synthèse vocale s'effectue sur votre machine. Aucun texte n'est envoyé. En mode HTTP, le texte est envoyé au fournisseur cloud configuré (OpenAI/ElevenLabs) conformément à leurs conditions d'utilisation de l'API. Aucune télémétrie.
-
-## Tableau de bord
-
-| Catégorie | Score | Notes |
-|----------|-------|-------|
-| A. Sécurité | 9/10 | SECURITY.md, par défaut uniquement local, clés API chiffrées dans le stockage de VS Code |
-| B. Gestion des erreurs | 8/10 | Démarrage automatique du backend, repli gracieux, messages d'état |
-| C. Documentation pour l'utilisateur | 9/10 | README, CHANGELOG, page d'accueil, documentation des paramètres |
-| D. Qualité du code | 9/10 | CI + tests (102), Marketplace de VS Code, couverture Codecov |
-| E. Identité | 10/10 | Logo, traductions, page d'accueil, fiche Marketplace |
-| **Total** | **45/50** | |
+- **Backend local (par défaut) :** Python/Kokoro TTS s'exécute entièrement sur votre machine, sans communication réseau.
+- **Backend cloud (facultatif) :** envoie le texte à une API TTS configurée par l'utilisateur (OpenAI/ElevenLabs) — nécessite une clé API explicite.
+- **Lecture audio :** utilise `spawn` avec un tableau d'arguments, et non une invite de commande — voir [SECURITY.md](SECURITY.md) pour plus de détails.
+- **Aucune télémétrie** n'est collectée ou envoyée.
 
 ## Licence
 

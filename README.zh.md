@@ -14,30 +14,30 @@
   <a href="https://mcp-tool-shop-org.github.io/vscode-voice-soundboard/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
 
-这是一个文本转语音扩展，包含48种声音、预设选项和多说话人对话功能，由[MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard) 提供支持。
+文本转语音扩展，包含48种声音、预设选项和多说话人对话功能，由[MCP Voice Soundboard](https://github.com/mcp-tool-shop-org/mcp-voice-soundboard) 提供支持。
 
 ## 功能
 
-- **侧边栏面板**，包含“朗读”、“声音”和“对话”三个选项卡。
+- **侧边栏面板**，包含“朗读”、“声音”和“对话”选项卡。
 - **48种声音**，涵盖9种语言（英语、日语、普通话、西班牙语、法语、印地语、意大利语、葡萄牙语）。
 - **5个预设**：助手、旁白、播报员、故事讲述者、低语。
-- **多说话人对话**：编写剧本，分配声音，然后播放所有内容。
-- **朗读选定内容**：高亮显示代码或文本，然后按 `Ctrl+Shift+S` 键。
-- **跨平台音频播放**（Windows、macOS、Linux）。
+- **多说话人对话**：编写剧本，分配声音，播放所有内容。
+- **朗读选择**：高亮代码或文本，然后按 `Ctrl+Shift+S`。
+- **跨平台**音频播放（Windows、macOS、Linux）。
 
 ## 入门
 
 1. 安装扩展。
 2. MCP Voice Soundboard 服务器将自动启动。
 3. 点击活动栏中的麦克风图标。
-4. 输入文本并点击“朗读”按钮。
+4. 输入文本并点击“朗读”。
 
 ## 命令
 
 | 命令 | 快捷键 | 描述 |
 |---------|----------|-------------|
 | Voice Soundboard: 朗读文本... | — | 输入要朗读的文本。 |
-| Voice Soundboard: 朗读选定内容 | `Ctrl+Shift+S` | 朗读编辑器中选定的文本。 |
+| Voice Soundboard: 朗读选择 | `Ctrl+Shift+S` | 朗读所选编辑器中的文本。 |
 | Voice Soundboard: 停止朗读 | — | 停止当前播放。 |
 | Voice Soundboard: 更改声音 | — | 快速选择声音。 |
 | Voice Soundboard: 切换面板 | — | 显示/隐藏侧边栏。 |
@@ -59,20 +59,12 @@
 | `voiceSoundboard.autoStart` | `true` | 激活时自动启动服务器 |
 | `voiceSoundboard.format` | `wav` | 音频输出格式 |
 
-## 隐私
+## 安全与数据范围
 
-在本地 Python 模式下（默认模式），所有语音合成都在您的机器上进行。不会将任何文本发送到其他地方。在 HTTP 模式下，文本会发送到配置的云服务提供商（OpenAI/ElevenLabs），具体取决于他们的 API 条款。没有收集任何遥测数据。
-
-## 评估
-
-| 类别 | 评分 | 备注 |
-|----------|-------|-------|
-| A. 安全性 | 9/10 | SECURITY.md，仅本地运行，VS Code 中加密存储的 API 密钥 |
-| B. 错误处理 | 8/10 | 后端自动启动，平滑降级，状态消息 |
-| C. 用户文档 | 9/10 | README，CHANGELOG，主页，设置文档 |
-| D. 发布质量 | 9/10 | CI + 测试（102），VS Code Marketplace，Codecov 覆盖率 |
-| E. 身份 | 10/10 | Logo，翻译，主页，Marketplace 列表 |
-| **Total** | **45/50** | |
+- **本地后端（默认）：** Python/Kokoro TTS 完全在您的机器上运行，无需网络连接。
+- **云后端（可选）：** 将文本发送到用户配置的 TTS API（OpenAI/ElevenLabs），需要明确的 API 密钥。
+- **音频播放：** 使用 `spawn` 配合参数数组，而不是 shell，详情请参见 [SECURITY.md](SECURITY.md)。
+- **不收集或发送任何遥测数据。**
 
 ## 许可证
 
