@@ -14,7 +14,7 @@ export const config: SiteConfig = {
     headlineAccent: '48 of them.',
     description: 'TTS synthesis with 48 voices across 9 languages, voice presets, and multi-speaker dialogue — all in a VS Code sidebar. Free local backend via Kokoro, or plug in OpenAI/ElevenLabs.',
     primaryCta: { href: 'https://marketplace.visualstudio.com/items?itemName=mcp-tool-shop.vscode-voice-soundboard', label: 'Install from Marketplace' },
-    secondaryCta: { href: '#features', label: 'See features' },
+    secondaryCta: { href: 'handbook/', label: 'Read the Handbook' },
     previews: [
       { label: 'Install', code: 'ext install mcp-tool-shop.vscode-voice-soundboard' },
       { label: 'Speak selection', code: 'Ctrl+Shift+S  →  speaks highlighted text' },
