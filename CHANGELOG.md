@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2026-03-25
+
+### Added
+- 5 additional version consistency tests (semver, >= 1.0.0, CHANGELOG, publisher, engine)
+
 ## [1.0.1] - 2026-03-25
 
 ### Fixed
