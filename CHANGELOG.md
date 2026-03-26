@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1] - 2026-03-25
+
+### Fixed
+- SHA-pin CI workflow actions (checkout, setup-node, codecov, gh-release, pages actions) for supply chain security
+
+### Added
+- Version alignment test suite (3 tests)
+
 ## [1.0.0] - 2026-02-27
 
 ### Added
