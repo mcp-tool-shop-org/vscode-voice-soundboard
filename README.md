@@ -19,7 +19,7 @@ Text-to-speech extension with 48 voices, presets, and multi-speaker dialogue —
 ## Features
 
 - **Sidebar panel** with Speak, Voices, and Dialogue tabs
-- **48 voices** across 9 languages (English, Japanese, Mandarin, Spanish, French, Hindi, Italian, Portuguese)
+- **48 voices** across 8 languages (English, Japanese, Mandarin, Spanish, French, Hindi, Italian, Portuguese)
 - **5 presets** — Assistant, Narrator, Announcer, Storyteller, Whisper
 - **Multi-speaker dialogue** — write scripts, assign voices, play all
 - **Speak Selection** — highlight code or text and press `Ctrl+Shift+S`
@@ -40,7 +40,7 @@ Text-to-speech extension with 48 voices, presets, and multi-speaker dialogue —
 | Voice Soundboard: Speak Selection | `Ctrl+Shift+S` | Speak selected editor text |
 | Voice Soundboard: Stop Speaking | — | Stop current playback |
 | Voice Soundboard: Change Voice | — | Quick-pick voice selector |
-| Voice Soundboard: Toggle Panel | — | Show/hide sidebar |
+| Voice Soundboard: Toggle Soundboard Panel | — | Show/hide sidebar |
 | Voice Soundboard: Export Dialogue as WebVTT | — | Export dialogue script as `.vtt` subtitle file |
 
 ## Dialogue Export
@@ -57,7 +57,9 @@ The exported `.vtt` file uses voice tags (`<v Speaker>`) and can be used with vi
 | `voiceSoundboard.speed` | `1.0` | Speech speed (0.5–2.0) |
 | `voiceSoundboard.backend` | `python` | TTS backend (python/http/mock) |
 | `voiceSoundboard.autoStart` | `true` | Auto-start server on activation |
-| `voiceSoundboard.format` | `wav` | Audio output format |
+| `voiceSoundboard.format` | `wav` | Audio output format (wav, mp3, ogg) |
+| `voiceSoundboard.openaiApiKey` | `""` | OpenAI API key for cloud TTS (http backend) |
+| `voiceSoundboard.pythonPath` | `""` | Path to Python executable (auto-detected if empty) |
 
 ## Security & Data Scope
 

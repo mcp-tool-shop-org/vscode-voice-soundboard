@@ -13,12 +13,12 @@ sidebar:
 | `Voice Soundboard: Speak Selection` | `Ctrl+Shift+S` | Speak selected editor text |
 | `Voice Soundboard: Stop Speaking` | — | Stop current playback |
 | `Voice Soundboard: Change Voice` | — | Quick-pick voice selector |
-| `Voice Soundboard: Toggle Panel` | — | Show/hide sidebar |
+| `Voice Soundboard: Toggle Soundboard Panel` | — | Show/hide sidebar |
 | `Voice Soundboard: Export Dialogue as WebVTT` | — | Export dialogue script as `.vtt` subtitle file |
 
 ## Voices
 
-48 voices across 9 languages:
+48 voices across 8 languages:
 
 | Language | Voices |
 |----------|--------|
@@ -38,10 +38,10 @@ Each voice has a unique ID (e.g., `bm_george`, `af_sarah`) used in settings and 
 
 The Dialogue tab lets you write multi-speaker scripts:
 
-1. Add lines with speaker assignments
-2. Assign a voice to each speaker
-3. Click **Play All** to hear the full dialogue
-4. Click **Export VTT** to save as a WebVTT subtitle file
+1. Write lines in `Speaker: Text` format (e.g., `Alice: Hello there!`)
+2. Assign a voice to each speaker using the cast panel that appears below the script
+3. Click **Play All** to hear the full dialogue sequentially
+4. Click **Export VTT** to synthesize all lines and save as a WebVTT subtitle file
 
 ### WebVTT export
 
@@ -59,7 +59,9 @@ The exported `.vtt` file includes:
 | `voiceSoundboard.speed` | `1.0` | Speech speed (0.5 to 2.0) |
 | `voiceSoundboard.backend` | `python` | TTS backend (`python`, `http`, or `mock`) |
 | `voiceSoundboard.autoStart` | `true` | Auto-start server on activation |
-| `voiceSoundboard.format` | `wav` | Audio output format |
+| `voiceSoundboard.format` | `wav` | Audio output format (`wav`, `mp3`, or `ogg`) |
+| `voiceSoundboard.openaiApiKey` | `""` | OpenAI API key for cloud TTS (`http` backend) |
+| `voiceSoundboard.pythonPath` | `""` | Path to Python executable (auto-detected if empty) |
 
 ## Backends
 

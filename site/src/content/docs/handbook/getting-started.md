@@ -9,10 +9,10 @@ This page walks you through installing Voice Soundboard, choosing a voice, and h
 
 ## Prerequisites
 
-- **VS Code** 1.80 or later
-- **Python 3.8+** (for the default Kokoro TTS backend)
+- **VS Code** 1.85 or later
+- **Python 3** (for the default Kokoro TTS backend — the extension will guide you through setup if missing)
 
-The MCP Voice Soundboard server starts automatically when the extension activates.
+The MCP Voice Soundboard server starts automatically when the extension activates. If Python or the Kokoro TTS package is not installed, a setup wizard walks you through installation or lets you switch to a cloud or mock backend.
 
 ## Installation
 
@@ -26,7 +26,7 @@ Search for "Voice Soundboard" in the VS Code Extensions panel, or install from t
 git clone https://github.com/mcp-tool-shop-org/vscode-voice-soundboard.git
 cd vscode-voice-soundboard
 npm ci
-npm run compile
+npm run build
 ```
 
 Press `F5` in VS Code to launch the Extension Development Host.
@@ -41,7 +41,7 @@ Press `F5` in VS Code to launch the Extension Development Host.
 
 1. Select any text in an editor
 2. Press `Ctrl+Shift+S` (or run `Voice Soundboard: Speak Selection` from the Command Palette)
-3. The selected text is spoken using the current voice and preset
+3. The selected text is spoken using the current voice and speed settings
 
 ## Choosing a voice
 
@@ -59,7 +59,7 @@ Presets adjust the speaking style without changing the voice:
 | Storyteller | Expressive, varied pacing |
 | Whisper | Soft, intimate, lower volume |
 
-Select a preset from the Speak tab dropdown or via the Command Palette.
+Select a preset from the buttons shown at the top of the Speak tab in the sidebar panel.
 
 ## Next steps
 
