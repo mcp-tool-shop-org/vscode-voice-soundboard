@@ -34,6 +34,16 @@ sidebar:
 
 Each voice has a unique ID (e.g., `bm_george`, `af_sarah`) used in settings and dialogue scripts.
 
+### Voice browsing
+
+The **Voices** tab in the sidebar provides search and filtering:
+
+- **Search** -- type part of a voice name or ID to filter the list
+- **Filter chips** -- quick toggles for American, British, Japanese, Male, and Female
+- **Preview** -- each voice card has a Preview button that plays a short sample
+
+You can also change the active voice from the Command Palette with **Voice Soundboard: Change Voice**, which opens a quick-pick list showing every voice with its accent, gender, and style.
+
 ## Multi-speaker dialogue
 
 The Dialogue tab lets you write multi-speaker scripts:

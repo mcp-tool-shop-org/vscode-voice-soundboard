@@ -73,6 +73,23 @@ Click a preset button to apply it before speaking.
 
 There are 48 voices organized by language and gender. Each voice has a unique ID like `bm_george` or `af_sarah`. The **Voices** tab in the sidebar lets you browse, search, and filter voices. Click any voice to hear a preview, then set it as your default.
 
+The Voices tab provides several ways to narrow down the list:
+
+- **Search box** -- type part of a voice name or ID to filter instantly
+- **Filter chips** -- quick filters for American, British, Japanese, Male, and Female voices
+- **Preview button** -- each voice card has a Preview button that speaks a short sample so you can compare before choosing
+
+### Status bar
+
+The extension adds a status indicator to the VS Code status bar (bottom-right). It shows the current connection state:
+
+- **Connecting** (spinning icon) -- the MCP server is starting up
+- **Ready** (unmuted icon) -- the server is connected and ready to speak
+- **Offline** (muted icon) -- the server is not running (autoStart is off, or it failed to start)
+- **Setup** (gear icon) -- the TTS backend needs configuration (click to open the sidebar)
+
+Click the status bar item at any time to toggle the sidebar panel.
+
 ### Backends
 
 The TTS engine that converts text to audio is called a "backend." There are three options:
@@ -144,6 +161,14 @@ If the pip install did not complete:
 - Verify your API key is set in `voiceSoundboard.openaiApiKey`
 - Check that the key has TTS permissions with your provider
 - The `http` backend sends your text to the configured cloud API -- ensure you have network access
+
+### Status bar shows "Setup Required"
+
+The extension detected that the TTS backend is not ready. Click the status bar item to open the sidebar, then click **Open Settings** in the setup banner. From there you can:
+
+- Set a Python path if auto-detection failed (`voiceSoundboard.pythonPath`)
+- Switch to the `http` backend and provide an API key
+- Switch to `mock` for silent testing
 
 ## 7. Next steps
 

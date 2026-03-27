@@ -10,6 +10,7 @@ This page walks you through installing Voice Soundboard, choosing a voice, and h
 ## Prerequisites
 
 - **VS Code** 1.85 or later
+- **Node.js** (the extension spawns the MCP server via `npx`)
 - **Python 3** (for the default Kokoro TTS backend — the extension will guide you through setup if missing)
 
 The MCP Voice Soundboard server starts automatically when the extension activates. If Python or the Kokoro TTS package is not installed, a setup wizard walks you through installation or lets you switch to a cloud or mock backend.
